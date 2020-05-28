@@ -748,10 +748,12 @@
 			if (options.innerWidth) {
 				settings.w = setSize(options.innerWidth, 'x');
 			}
+			// Dave added:
 			if (options.maxWidth) {
 				settings.mw = setSize(options.maxWidth, 'x') - loadedWidth - interfaceWidth;
 			}
 			settings.w = settings.mw && settings.mw < settings.w ? settings.mw : settings.w;
+			// -Dave
 
 			$loaded.css({width: settings.w});
 
@@ -762,21 +764,25 @@
 			if (options.innerHeight) {
 				settings.h = setSize(options.innerHeight, 'y');
 			}
+			// Dave added:
 			if (options.maxHeight) {
 				settings.mh = setSize(options.maxHeight, 'y') - loadedHeight - interfaceHeight;
 			}
-			if (!options.innerHeight && !options.height) {				
+			if (!options.innerHeight && !options.height) {
 				var $child = $loaded.wrapInner("<div style='overflow:auto'></div>").children(); // temporary wrapper to get an accurate estimate of just how high the total content should be.
 				settings.h = $child.height();
 				$child.replaceWith($child.children()); // ditch the temporary wrapper div used in height calculation
 			}
+			// -Dave
 
 			if (!options.innerHeight && !options.height) {
 				scrolltop = $loaded.scrollTop();
 				$loaded.css({height: "auto"});
 				settings.h = $loaded.height();
 			}
+			// Dave added:
 			settings.h = settings.mh && settings.mh < settings.h ? settings.mh : settings.h;
+			// -Dave
 
 			$loaded.css({height: settings.h});
 
